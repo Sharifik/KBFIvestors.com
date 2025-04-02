@@ -1,0 +1,44 @@
+<a href="index.html">Home</a>
+<section> 
+
+        <h3>MISSION</h3>
+        <p>“To help improve access to clean  and  safe water and the quality of Health and Education  service delivery for the neediest communities in rural Uganda”.<p>
+
+        <h3>VISION</h3>
+        <p>A community where all members live positive and sustainable lives</p>
+        
+        <h3>CORE VALUES</h3>
+        <p>We believe people are the primary actors in their own survival and development
+        <p>We work for social justice and equality, especially for the poor and marginalized
+        <p>We work in partnership with communities and in alliance with other organisations
+        <p>We contribute to the prevention and resolution of challenges affecting the communities we work with, aware that social justice and equality are the basis of meaningful peace
+        <p>Integrity and courage in carrying out our work
+        <p>We  respect  and  celebrate  diversity,  both  within  the  communities  we  work,  and  our  own organisation.
+        <p>We Seek to achieve excellence in what we do.</P>
+        <h3>Target Group</h3>
+        <P><b>SUUBI‟s work targets the rural poor communities as classified below:</b>
+Without access to clean and safer water.
+Cannot access public health facilities (distance and means)
+Affected by high incidence of preventable diseases.
+Have low levels of education.
+  Food insecure and low incomes.</P>
+</section>
+
+<section>
+         <h3>STRATEGIC GOALS</h3>
+         <p>1.   To provide access to clean and safe water to rural Ugandans by constructing safe water sources close to households
+         <p>2.   To improve service provision in schools by infrastructure development. 
+         <p>3.   To promote economic empowerment through self-help group economic activities
+          <p>4.   To improve service provision in Health centers by providing water systems, lighting and other equipment.</p>
+</section> 
+
+<section>
+        <h3>Some of villages whic were rovided with clean water with visuals</h3>
+                      <b>Click here</b>
+</section>
+<section>
+        <p>This is bweba village were poeple used to suffer from health deases becuase dirty water
+        <p>But then Suubi constructed well for the aseen and now poeple are happy and leaving good health.</P>
+        <video src="C:\Users\Elitebook 845 G7\Desktop\Databases\suubi\5 12 24\KASEKERE VILLAGE WELL/Video.mp4" controls type="video/=mp4" widith="440"height="460"></video>
+</section>
+
