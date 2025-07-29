@@ -1,7 +1,7 @@
 <1DOCTYPE html>
 <html>
          <head>
-               <title>Suubi Community projecta Uganda Homepage</title>
+               <title>KBF INVESTO'S MICRO FINANCE Homepage</title>
                <create name="description" Content="Suubi Community Projects is non Govnment Organisation which is based on improving community standerds of people">
          
          </head>
