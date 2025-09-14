@@ -1,26 +1,742 @@
-<1DOCTYPE html>
-<html>
-         <head>
-               <title>KBF INVESTO'S MICRO FINANCE Homepage</title>
-               <create name="description" Content="Suubi Community Projects is non Govnment Organisation which is based on improving community standerds of people">
-         
-         </head>
-         <body>
-         <img src="C:\Users\Elitebook 845 G7\Desktop\Suubi/Suubi.png" widith="150px"height="150px"="Suubi Community Projects Logo">
-<h2>SUUBI COMMUNITY PROJECTS UGANDA</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <style>
+        :root {
+            --whatsapp-green: #128c7e;
+            --whatsapp-light: #e5f6ea;
+            --whatsapp-message-sent: #d9fdd3;
+            --whatsapp-message-received: #ffffff;
+            --whatsapp-time: #667781;
+            --whatsapp-text: #111b21;
+            --whatsapp-header: #f0f2f5;
+            --whatsapp-input-bg: #ffffff;
+            --whatsapp-border: #d1d7db;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
 
-        <section> 
-         <h3>ABOUT SUUBI COMMUNITY PROJECTS UGANDA</h3>
-         <p>Suubi Community Projects Uganda (SUUBI) is a community based organization founded in 2013 and incorporated on the  16th of June 2015. SUUBI is a Luganda word that means Hope; in all our activities we strive to restore hope where it has been lost. As a community based and self-help organization, all our projects start within the beneficiary communities and are sustained by the communities themselves. Thus, we "help communities to help themselves". The organization has 5 permanent staff and 13 contract staff. <b>The organization currently operates in the districts of Mukono,
-Hoima, Ibanda, Kayunga and Kyegegwa.</b></p></section>
-<h3>Read more about Suubi Community projects Uganda</h3> 
-<a href="Suubi.html"><b><p>Click here</p></b><a>
+        body {
+            background: #e5ded8;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-        </body>
-</html>
-         
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #e5ddd5;
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-header {
+            background: var(--whatsapp-header);
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--whatsapp-border);
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 1rem;
+            color: var(--whatsapp-text);
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 16px;
+            background-image: url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c5c5c5' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M400 0C179 0 0 179 0 400s179 400 400 400 400-179 400-400S621 0 400 0zm0 50c193.3 0 350 156.7 350 350s-156.7 350-350 350S50 593.3 50 400 206.7 50 400 50z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .message {
+            max-width: 65%;
+            padding: 6px 7px 8px 9px;
+            margin: 2px 0;
+            border-radius: 7.5px;
+            position: relative;
+            word-wrap: break-word;
+            animation: fadeIn 0.2s ease-out;
+            box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+            line-height: 1.4;
+            font-size: 14.2px;
+        }
+
+        .message.sent {
+            background: var(--whatsapp-message-sent);
+            margin-left: auto;
+            border-top-right-radius: 0;
+            margin-right: 8px;
+        }
+
+        .message.received {
+            background: var(--whatsapp-message-received);
+            margin-right: auto;
+            border-top-left-radius: 0;
+            margin-left: 8px;
+        }
+
+        .message .username {
+            font-weight: 600;
+            font-size: 12.8px;
+            margin-bottom: 2px;
+            color: var(--whatsapp-green);
+        }
+
+        .message .time {
+            font-size: 11px;
+            color: var(--whatsapp-time);
+            margin: 2px 0 0 8px;
+            display: inline-flex;
+            align-items: center;
+            float: right;
+            height: 15px;
+        }
+
+        .message-input-container {
+            padding: 10px;
+            background: var(--whatsapp-header);
+            border-top: 1px solid var(--whatsapp-border);
+        }
+
+        .input-group {
+            display: flex;
+            background: var(--whatsapp-input-bg);
+            border-radius: 8px;
+            padding: 5px 10px;
+            align-items: center;
+        }
+
+        #message-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 9px 12px 11px 0;
+            font-size: 15px;
+            min-height: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+            resize: none;
+            line-height: 20px;
+        }
+
+        #message-input:empty::before {
+            content: attr(placeholder);
+            color: var(--whatsapp-time);
+            pointer-events: none;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--whatsapp-time);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 8px;
+        }
         
+        .icon-button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .send-button {
+            background: var(--whatsapp-green);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 4px;
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Status message */
+        .status-message {
+            text-align: center;
+            color: var(--whatsapp-time);
+            font-size: 12.5px;
+            margin: 10px 0;
+            padding: 5px 12px 6px;
+            background: rgba(134, 150, 160, 0.15);
+            border-radius: 7.5px;
+            display: inline-block;
+            max-width: 80%;
+            box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.08);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .message {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Simple Chat</h1>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <div class="status-message" id="connection-status">Welcome to Simple Chat!</div>
+        </div>
+        
+        <div class="message-input-container">
+            <div class="input-group">
+                <button id="attach-button" class="icon-button" title="Attach photo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                    </svg>
+                </button>
+                <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                
+                <div contenteditable="true" id="message-input" class="message-input" 
+                     placeholder="Type a message..." role="textbox" aria-multiline="true"></div>
+                
+                <button id="record-button" class="icon-button" title="Record voice">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+                
+                <button id="send-button" class="send-button" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Add styles for media messages */
+        .message-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .message-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .audio-message {
+            display: flex;
+            align-items: center;
+            background: #f0f2f5;
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin-top: 4px;
+            max-width: 250px;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .play-pause-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--whatsapp-green);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .progress-container {
+            flex: 1;
+            height: 4px;
+            background: #d1d7db;
+            border-radius: 2px;
+            margin: 0 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--whatsapp-green);
+            transition: width 0.1s linear;
+        }
+        
+        .duration {
+            font-size: 12px;
+            color: var(--whatsapp-time);
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        /* Recording indicator */
+        .recording-indicator {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .pulse {
+            width: 12px;
+            height: 12px;
+            background: #ff3b30;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+    </style>
+    
+    <!-- Add recording indicator -->
+    <div class="recording-indicator" id="recording-indicator">
+        <div class="pulse"></div>
+        <span>Recording... <span id="recording-time">0:00</span></span>
+        <button id="stop-recording" style="margin-left: 10px; background: #ff3b30; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer;">
+            Stop
+        </button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const connectionStatus = document.getElementById('connection-status');
+            const attachButton = document.getElementById('attach-button');
+            const photoInput = document.getElementById('photo-input');
+            const recordButton = document.getElementById('record-button');
+            const recordingIndicator = document.getElementById('recording-indicator');
+            const recordingTime = document.getElementById('recording-time');
+            const stopRecordingButton = document.getElementById('stop-recording');
+            
+            let mediaRecorder;
+            let audioChunks = [];
+            let recordingStartTime;
+            let recordingTimer;
+            
+            // Username prompt
+            let username = localStorage.getItem('chat_username');
+            if (!username) {
+                username = prompt('Please enter your name:') || 'User' + Math.floor(Math.random() * 1000);
+                localStorage.setItem('chat_username', username);
+            }
+            
+            // Set connection status
+            connectionStatus.textContent = `Connected as ${username}`;
+            
+            // Add a new message to the chat
+            function addMessage(content, type = 'text', isSent = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isSent ? 'sent' : 'received'}`;
+                
+                const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                let contentHtml = '';
+                
+                if (type === 'text') {
+                    contentHtml = `<div class="message-content">${content}</div>`;
+                } else if (type === 'image') {
+                    contentHtml = `
+                        <div class="message-content">
+                            <img src="${content}" alt="Shared image" class="message-image" onclick="showImage('${content}')">
+                        </div>`;
+                } else if (type === 'audio') {
+                    contentHtml = `
+                        <div class="message-content">
+                            <div class="audio-message">
+                                <div class="audio-controls">
+                                    <button class="play-pause-btn" onclick="togglePlayPause(this)">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                    </button>
+                                    <div class="progress-container" onclick="seekAudio(this, event)">
+                                        <div class="progress-bar"></div>
+                                    </div>
+                                    <audio src="${content}" preload="metadata" ontimeupdate="updateProgressBar(this)" onended="onAudioEnd(this)"></audio>
+                                    <span class="duration">0:00</span>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                
+                messageDiv.innerHTML = `
+                    <div class="username">${isSent ? 'You' : username}</div>
+                    ${contentHtml}
+                    <span class="time">${time}</span>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+                
+                // Initialize audio players if this is an audio message
+                if (type === 'audio') {
+                    initializeAudioPlayers();
+                }
+            }
+            
+            // Scroll to bottom of chat
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Handle send button click
+            sendButton.addEventListener('click', sendMessage);
+            
+            // Handle Enter key (but allow Shift+Enter for new line)
+            messageInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+                
+                // Enable/disable send button based on input
+                updateSendButton();
+            });
+            
+            // Update send button state
+            function updateSendButton() {
+                const text = messageInput.textContent.trim();
+                sendButton.disabled = !text;
+            }
+            
+            // Send message function
+            function sendMessage() {
+                const text = messageInput.textContent.trim();
+                if (!text) return;
+                
+                // Add message to chat
+                addMessage(text, 'text', true);
+                
+                // Clear input
+                messageInput.textContent = '';
+                updateSendButton();
+                
+                // Simulate received message after a short delay
+                setTimeout(() => {
+                    addMessage('Thanks for your message! This is a simulated response.', 'text');
+                }, 1000);
+            }
+            
+            // Handle photo upload
+            attachButton.addEventListener('click', () => {
+                photoInput.click();
+            });
+            
+            photoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    // Add the image to the chat
+                    addMessage(event.target.result, 'image', true);
+                    
+                    // Simulate a response
+                    setTimeout(() => {
+                        addMessage('Nice photo!', 'text');
+                    }, 1000);
+                };
+                reader.readAsDataURL(file);
+                
+                // Reset the input to allow selecting the same file again
+                photoInput.value = '';
+            });
+            
+            // Voice recording functionality
+            recordButton.addEventListener('mousedown', startRecording);
+            recordButton.addEventListener('touchstart', startRecording);
+            stopRecordingButton.addEventListener('click', stopRecording);
+            
+            // Handle release of record button (for touch devices)
+            document.addEventListener('mouseup', stopRecordingOnRelease);
+            document.addEventListener('touchend', stopRecordingOnRelease);
+            
+            function startRecording(e) {
+                e.preventDefault();
+                
+                // Show recording indicator
+                recordingIndicator.style.display = 'flex';
+                
+                // Start the recording timer
+                recordingStartTime = Date.now();
+                updateRecordingTime();
+                recordingTimer = setInterval(updateRecordingTime, 1000);
+                
+                // Request access to the microphone
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        mediaRecorder = new MediaRecorder(stream);
+                        audioChunks = [];
+                        
+                        mediaRecorder.ondataavailable = event => {
+                            if (event.data.size > 0) {
+                                audioChunks.push(event.data);
+                            }
+                        };
+                        
+                        mediaRecorder.onstop = () => {
+                            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                            const audioUrl = URL.createObjectURL(audioBlob);
+                            
+                            // Add the audio message to the chat
+                            addMessage(audioUrl, 'audio', true);
+                            
+                            // Simulate a response
+                            setTimeout(() => {
+                                addMessage('I heard your voice message!', 'text');
+                            }, 1000);
+                            
+                            // Stop all tracks in the stream
+                            stream.getTracks().forEach(track => track.stop());
+                        };
+                        
+                        mediaRecorder.start();
+                    })
+                    .catch(error => {
+                        console.error('Error accessing microphone:', error);
+                        alert('Could not access microphone. Please check your permissions.');
+                        stopRecording();
+                    });
+            }
+            
+            function stopRecordingOnRelease(e) {
+                // Only stop if the recording was actually started
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    stopRecording();
+                }
+            }
+            
+            function stopRecording() {
+                // Hide recording indicator
+                recordingIndicator.style.display = 'none';
+                
+                // Stop the recording timer
+                clearInterval(recordingTimer);
+                
+                // Stop the media recorder if it's active
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                }
+            }
+            
+            function updateRecordingTime() {
+                const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                recordingTime.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            // Audio player functions
+            function initializeAudioPlayers() {
+                document.querySelectorAll('.audio-message').forEach(player => {
+                    const audio = player.querySelector('audio');
+                    const playPauseBtn = player.querySelector('.play-pause-btn');
+                    const progressBar = player.querySelector('.progress-bar');
+                    const durationDisplay = player.querySelector('.duration');
+                    
+                    // Set initial duration
+                    audio.addEventListener('loadedmetadata', () => {
+                        const duration = Math.floor(audio.duration);
+                        durationDisplay.textContent = formatDuration(duration);
+                    });
+                    
+                    // Play/pause on button click
+                    playPauseBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        togglePlayPause(playPauseBtn);
+                    });
+                    
+                    // Update progress bar as audio plays
+                    audio.addEventListener('timeupdate', () => {
+                        const progress = (audio.currentTime / audio.duration) * 100;
+                        progressBar.style.width = `${progress}%`;
+                        durationDisplay.textContent = formatDuration(audio.currentTime);
+                    });
+                    
+                    // Seek on progress bar click
+                    player.querySelector('.progress-container').addEventListener('click', (e) => {
+                        const rect = e.target.getBoundingClientRect();
+                        const pos = (e.clientX - rect.left) / rect.width;
+                        audio.currentTime = pos * audio.duration;
+                    });
+                });
+            }
+            
+            // Format duration in seconds to MM:SS
+            function formatDuration(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            // Global functions for audio controls
+            window.togglePlayPause = function(button) {
+                const player = button.closest('.audio-message');
+                const audio = player.querySelector('audio');
+                const icon = button.querySelector('svg');
+                
+                if (audio.paused) {
+                    // Pause all other audio players
+                    document.querySelectorAll('.audio-message audio').forEach(a => {
+                        if (a !== audio && !a.paused) {
+                            a.pause();
+                            const btn = a.closest('.audio-message').querySelector('.play-pause-btn');
+                            btn.innerHTML = `
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            `;
+                        }
+                    });
+                    
+                    audio.play();
+                    icon.innerHTML = `
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    `;
+                } else {
+                    audio.pause();
+                    icon.innerHTML = `
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    `;
+                }
+            };
+            
+            window.seekAudio = function(progressContainer, event) {
+                const rect = progressContainer.getBoundingClientRect();
+                const pos = (event.clientX - rect.left) / rect.width;
+                const audio = progressContainer.closest('.audio-message').querySelector('audio');
+                audio.currentTime = pos * audio.duration;
+            };
+            
+            window.updateProgressBar = function(audio) {
+                const progressBar = audio.closest('.audio-message').querySelector('.progress-bar');
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                const durationDisplay = audio.closest('.audio-message').querySelector('.duration');
+                durationDisplay.textContent = formatDuration(audio.currentTime);
+            };
+            
+            window.onAudioEnd = function(audio) {
+                const playPauseBtn = audio.closest('.audio-message').querySelector('.play-pause-btn');
+                playPauseBtn.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                `;
+                audio.currentTime = 0;
+                const progressBar = audio.closest('.audio-message').querySelector('.progress-bar');
+                progressBar.style.width = '0%';
+            };
+            
+            // Image preview modal
+            window.showImage = function(src) {
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                modal.style.cursor = 'pointer';
+                
+                const img = document.createElement('img');
+                img.src = src;
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+                img.style.objectFit = 'contain';
+                
+                modal.appendChild(img);
+                document.body.appendChild(modal);
+                
+                // Close modal when clicking outside the image
+                modal.addEventListener('click', function() {
+                    document.body.removeChild(modal);
+                });
+            };
+            
+            // Initial scroll to bottom
+            scrollToBottom();
+            
+            // Update send button on input
+            messageInput.addEventListener('input', updateSendButton);
+        });
+    </script>
+</body>
+</html>
+
+        
+
 
 
 
